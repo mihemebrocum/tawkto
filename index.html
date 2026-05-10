@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Short survey with consent, age question, and live chat." />
+  <title>Survey and Live Chat</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="card" aria-labelledby="page-title">
+      <div class="badge">Private survey</div>
+      <h1 id="page-title">Short Survey</h1>
+      <p class="intro">
+        Please answer the questions below. If you consent, you can also start a live chat.
+      </p>
+
+      <form id="surveyForm" method="POST" target="hiddenFrame" novalidate>
+        <input type="text" class="website-field" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="field">
+          <fieldset>
+            <legend>Do you consent to share your information?</legend>
+            <div class="choice-grid">
+              <label class="choice-card">
+                <input type="radio" name="consent" value="Yes" required />
+                <span>
+                  <strong>Yes</strong>
+                  <small>I consent to share my survey answer.</small>
+                </span>
+              </label>
+
+              <label class="choice-card">
+                <input type="radio" name="consent" value="No" required />
+                <span>
+                  <strong>No</strong>
+                  <small>I do not consent.</small>
+                </span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="field hidden" id="ageField">
+          <label for="age">What is your age?</label>
+          <input type="number" id="age" name="age" min="1" max="120" inputmode="numeric" placeholder="Enter your age" />
+        </div>
+
+        <input type="hidden" id="submittedAt" name="submittedAt" />
+        <input type="hidden" id="pageUrl" name="pageUrl" />
+        <input type="hidden" id="userAgent" name="userAgent" />
+        <input type="hidden" id="timeZone" name="timeZone" />
+
+        <div class="actions">
+          <button class="primary-btn" type="submit">Submit answers</button>
+          <button class="dark-btn hidden" type="button" id="chatButton">Chat with me</button>
+        </div>
+
+        <p class="helper-text">
+          Your answers are submitted directly to the site owner’s Google Sheet.
+        </p>
+
+        <div id="statusBox" class="status hidden" role="status" aria-live="polite"></div>
+      </form>
+
+      <iframe name="hiddenFrame" title="Hidden form submission frame" class="hidden-frame"></iframe>
+
+      <p class="privacy-note">
+        See <a href="privacy.html">privacy information</a>.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    window.SURVEY_CONFIG = {
+      // 1) Replace this after deploying Google Apps Script as a Web App.
+      googleAppsScriptUrl: "https://script.google.com/macros/s/AKfycbwp5qUxGXv_vlw2IL_1O-CmN7vJeRi9qkmHJLS77qxZc27FJgSsnvKLVhIbrtheYKyg/exec",
+
+      // 2) Replace this with only the src URL from your Tawk.to widget code.
+      // Example format: https://embed.tawk.to/PROPERTY_ID/WIDGET_ID
+      tawkScriptUrl: "https://embed.tawk.to/6a009c31db08b91c337bd696/1jo9648lj"
+    };
+  </script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
