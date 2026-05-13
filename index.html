@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Short survey with consent, age question, and live chat." />
-  <title>Survey and Live Chat</title>
+  <meta name="description" content="Onay, yaş sorusu ve canlı sohbet içeren kısa anket." />
+  <title>Anket ve Canlı Sohbet</title>
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <main class="page">
     <section class="card" aria-labelledby="page-title">
-      <div class="badge">Private survey</div>
-      <h1 id="page-title">Short Survey</h1>
+      <div class="badge">Özel anket</div>
+      <h1 id="page-title">Kısa Anket</h1>
       <p class="intro">
-        Please answer the questions below. If you consent, you can also start a live chat.
+        Lütfen aşağıdaki soruları cevaplayın. Onay verirseniz, canlı sohbeti de başlatabilirsiniz.
       </p>
 
       <form id="surveyForm" method="POST" target="hiddenFrame" novalidate>
@@ -21,21 +21,21 @@
 
         <div class="field">
           <fieldset>
-            <legend>Do you consent to share your information?</legend>
+            <legend>Bilgilerinizi paylaşmaya onay veriyor musunuz?</legend>
             <div class="choice-grid">
               <label class="choice-card">
                 <input type="radio" name="consent" value="Yes" required />
                 <span>
-                  <strong>Yes</strong>
-                  <small>I consent to share my survey answer.</small>
+                  <strong>Evet</strong>
+                  <small>Anket cevabımı paylaşmaya onay veriyorum.</small>
                 </span>
               </label>
 
               <label class="choice-card">
                 <input type="radio" name="consent" value="No" required />
                 <span>
-                  <strong>No</strong>
-                  <small>I do not consent.</small>
+                  <strong>Hayır</strong>
+                  <small>Onay vermiyorum.</small>
                 </span>
               </label>
             </div>
@@ -43,8 +43,8 @@
         </div>
 
         <div class="field hidden" id="ageField">
-          <label for="age">What is your age?</label>
-          <input type="number" id="age" name="age" min="1" max="120" inputmode="numeric" placeholder="Enter your age" />
+          <label for="age">Yaşınız nedir?</label>
+          <input type="number" id="age" name="age" min="1" max="120" inputmode="numeric" placeholder="Yaşınızı girin" />
         </div>
 
         <input type="hidden" id="submittedAt" name="submittedAt" />
@@ -53,12 +53,12 @@
         <input type="hidden" id="timeZone" name="timeZone" />
 
         <div class="actions">
-          <button class="primary-btn" type="submit">Submit answers</button>
-          <button class="dark-btn hidden" type="button" id="chatButton">Chat with me</button>
+          <button class="primary-btn" type="submit">Cevapları gönder</button>
+          <button class="dark-btn hidden" type="button" id="chatButton">Benimle sohbet et</button>
         </div>
 
         <p class="helper-text">
-          Your answers are submitted directly to the site owner’s Google Sheet.
+          Cevaplarınız doğrudan site sahibinin Google Sheet'ine gönderilir.
         </p>
 
         <div id="statusBox" class="status hidden" role="status" aria-live="polite"></div>
@@ -67,7 +67,7 @@
       <iframe name="hiddenFrame" title="Hidden form submission frame" class="hidden-frame"></iframe>
 
       <p class="privacy-note">
-        See <a href="privacy.html">privacy information</a>.
+        <a href="privacy.html">Gizlilik bilgilerini</a> görün.
       </p>
     </section>
   </main>
