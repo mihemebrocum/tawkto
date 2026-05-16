@@ -54,7 +54,7 @@
 
       if (!consent) {
         event.preventDefault();
-        showStatus("Please choose Yes or No for consent.", "error");
+        showStatus("Lütfen evet veya hayır seçeneklerinden birini seçin", "error");
         return;
       }
 
@@ -83,7 +83,7 @@
         submitButton.textContent = "Submit answers";
 
         if (consent === "Yes") {
-          showStatus("Thank you. Your answer has been submitted. You may now start the chat.", "success");
+          showStatus("Teşekkürler! Cevabınız gönderildi. Şimdi canlı sohbete bağlanın!", "success");
           chatButton.classList.remove("hidden");
         } else {
           showStatus("Thank you. Your response has been recorded.", "success");
@@ -136,7 +136,7 @@
       return;
     }
 
-    showStatus("Chat is still loading. Please try again in a moment.", "error");
+    showStatus("Chat yükleniyor. Lütfen bekleyiniz", "error");
   }
 
   function getConsentValue() {
