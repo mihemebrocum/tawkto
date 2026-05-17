@@ -1,8 +1,6 @@
 (function () {
   const config = window.SURVEY_CONFIG || {};
   const form = document.getElementById("surveyForm");
-  const ageField = document.getElementById("ageField");
-  const ageInput = document.getElementById("age");
   const chatButton = document.getElementById("chatButton");
   const statusBox = document.getElementById("statusBox");
   const submitButton = form.querySelector("button[type='submit']");
@@ -16,25 +14,14 @@
     form.action = googleUrl;
   }
 
-  setupConsentBehavior();
+  setupAnswerBehavior();
   setupFormSubmission();
   setupChat();
 
-  function setupConsentBehavior() {
-    document.querySelectorAll('input[name="consent"]').forEach((input) => {
+  function setupAnswerBehavior() {
+    document.querySelectorAll('input[name="relationshipStatus"]').forEach((input) => {
       input.addEventListener("change", () => {
-        const consent = getConsentValue();
-
-        if (consent === "Yes") {
-          ageField.classList.remove("hidden");
-          ageInput.required = true;
-        } else {
-          ageField.classList.add("hidden");
-          ageInput.required = false;
-          ageInput.value = "";
-          chatButton.classList.add("hidden");
-        }
-
+        chatButton.classList.add("hidden");
         clearStatus();
       });
     });
@@ -46,25 +33,16 @@
 
       if (isPlaceholder(googleUrl)) {
         event.preventDefault();
-        showStatus("Please paste your Google Apps Script Web App URL into index.html first.", "error");
+        showStatus("Önce index.html içindeki Google Apps Script Web App URL'sini eklemelisiniz.", "error");
         return;
       }
 
-      const consent = getConsentValue();
+      const relationshipStatus = getRelationshipStatus();
 
-      if (!consent) {
+      if (!relationshipStatus) {
         event.preventDefault();
-        showStatus("Lütfen evet veya hayır seçeneklerinden birini seçin", "error");
+        showStatus("Lütfen evet veya hayır seçeneklerinden birini seçin.", "error");
         return;
-      }
-
-      if (consent === "Yes") {
-        const age = Number(ageInput.value);
-        if (!age || age < 1 || age > 120) {
-          event.preventDefault();
-          showStatus("Please enter a valid age between 1 and 120.", "error");
-          return;
-        }
       }
 
       document.getElementById("submittedAt").value = new Date().toISOString();
@@ -73,20 +51,19 @@
       document.getElementById("timeZone").value = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
 
       submitButton.disabled = true;
-      submitButton.textContent = "Submitting...";
+      submitButton.textContent = "Gönderiliyor...";
 
-      // We submit to a hidden iframe to avoid CORS problems.
-      // The exact success response cannot be read because the iframe is cross-origin,
-      // but Apps Script will still append the row to Google Sheets.
+      // Hidden iframe ile gönderiyoruz; bu sayede CORS sorunu çıkmadan
+      // Google Apps Script cevabı Google Sheet'e ekleyebilir.
       window.setTimeout(() => {
         submitButton.disabled = false;
-        submitButton.textContent = "Submit answers";
+        submitButton.textContent = "Cevabımı gönder";
 
-        if (consent === "Yes") {
-          showStatus("Teşekkürler! Cevabınız gönderildi. Şimdi canlı sohbete bağlanın!", "success");
+        if (relationshipStatus === "Hayatımda biri yok") {
+          showStatus("Teşekkür ederim. Cevabın gönderildi. İstersen benimle buradan iletişime geçebilirsin.", "success");
           chatButton.classList.remove("hidden");
         } else {
-          showStatus("Thank you. Your response has been recorded.", "success");
+          showStatus("Teşekkür ederim. Cevabın gönderildi. Seni rahatsız etmeyeceğim.", "success");
           chatButton.classList.add("hidden");
         }
       }, 900);
@@ -118,7 +95,7 @@
 
   function openChat() {
     if (isPlaceholder(tawkScriptUrl)) {
-      showStatus("Please paste your Tawk.to widget script URL into index.html first.", "error");
+      showStatus("Önce index.html içindeki Tawk.to widget script URL'sini eklemelisiniz.", "error");
       return;
     }
 
@@ -136,11 +113,11 @@
       return;
     }
 
-    showStatus("Chat yükleniyor. Lütfen bekleyiniz", "error");
+    showStatus("Sohbet yükleniyor. Lütfen birkaç saniye sonra tekrar deneyin.", "error");
   }
 
-  function getConsentValue() {
-    return document.querySelector('input[name="consent"]:checked')?.value || "";
+  function getRelationshipStatus() {
+    return document.querySelector('input[name="relationshipStatus"]:checked')?.value || "";
   }
 
   function showStatus(message, type) {
