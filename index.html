@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Onay, yaş sorusu ve canlı sohbet içeren kısa anket." />
-  <title>Anket ve Canlı Sohbet</title>
+  <meta name="description" content="Kısa bir tanışma mesajı ve tek soruluk cevap formu." />
+  <title>Kısa Bir Mesaj</title>
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <main class="page">
     <section class="card" aria-labelledby="page-title">
-      <div class="badge">Özel anket</div>
-      <h1 id="page-title">Kısa Anket</h1>
+      <div class="badge">Özel mesaj</div>
+      <h1 id="page-title">Merhaba</h1>
       <p class="intro">
-        Lütfen aşağıdaki soruları cevaplayın. Onay verirseniz, canlı sohbeti de başlatabilirsiniz.
+        Bu siteyi seninle iletişime geçmek için kurdum. Seni uzun zamandır beğeniyordum.
+        Bunu gelip yüz yüze söylemek isterdim; ama öncesinde, sadece hayatında biri olup olmadığını
+        öğrenmem gerektiğini düşündüm. Böylece hoş olmayan bir durum ortaya çıkmasın istedim.
+        <br /><br />
+        Hayatında biri olduğunu belirtirsen seni rahatsız etmeyeceğim. Hayatında biri yoksa ve yine de
+        cevabın olumsuz olursa, yine seni rahatsız etmeyeceğimden emin olabilirsin. Elbette umudum,
+        tanışma teklifimi kabul etmen yönünde. Sonrasında beni yüz yüze reddedebilirsin :(
+        <br /><br />
+        Aşağıdaki tek soruyu yanıtlayabilirsen çok sevinirim.
       </p>
 
       <form id="surveyForm" method="POST" target="hiddenFrame" novalidate>
@@ -21,30 +29,25 @@
 
         <div class="field">
           <fieldset>
-            <legend>Bilgilerinizi paylaşmaya onay veriyor musunuz?</legend>
+            <legend>Hayatınızda biri var mı?</legend>
             <div class="choice-grid">
               <label class="choice-card">
-                <input type="radio" name="consent" value="Yes" required />
+                <input type="radio" name="relationshipStatus" value="Hayatımda biri var" required />
                 <span>
                   <strong>Evet</strong>
-                  <small>Anket cevabımı paylaşmaya onay veriyorum.</small>
+                  <small>Hayatımda biri var.</small>
                 </span>
               </label>
 
               <label class="choice-card">
-                <input type="radio" name="consent" value="No" required />
+                <input type="radio" name="relationshipStatus" value="Hayatımda biri yok" required />
                 <span>
                   <strong>Hayır</strong>
-                  <small>Onay vermiyorum.</small>
+                  <small>Hayatımda biri yok.</small>
                 </span>
               </label>
             </div>
           </fieldset>
-        </div>
-
-        <div class="field hidden" id="ageField">
-          <label for="age">Yaşınız nedir?</label>
-          <input type="number" id="age" name="age" min="1" max="120" inputmode="numeric" placeholder="Yaşınızı girin" />
         </div>
 
         <input type="hidden" id="submittedAt" name="submittedAt" />
@@ -53,12 +56,12 @@
         <input type="hidden" id="timeZone" name="timeZone" />
 
         <div class="actions">
-          <button class="primary-btn" type="submit">Cevapları gönder</button>
-          <button class="dark-btn hidden" type="button" id="chatButton">Benimle sohbet et</button>
+          <button class="primary-btn" type="submit">Cevabımı gönder</button>
+          <button class="dark-btn hidden" type="button" id="chatButton">Benimle iletişime geç</button>
         </div>
 
         <p class="helper-text">
-          Cevaplarınız doğrudan site sahibinin Google Sheet'ine gönderilir.
+          Cevabınız yalnızca site sahibine iletilir.
         </p>
 
         <div id="statusBox" class="status hidden" role="status" aria-live="polite"></div>
